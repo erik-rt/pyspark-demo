@@ -37,11 +37,6 @@ def start_spark(
     log4jLogger = sc._jvm.org.apache.log4j
     spark_logger = log4jLogger.LogManager.getLogger("pyspark-logger")
 
-    # Set up Hadoop config to omit the _SUCCESS file from being written
-    sc.hadoopConfiguration.set(
-        "mapreduce.fileoutputcommitter.marksuccessfuljobs", "false"
-    )
-
     # Get config file if sent to cluster with --files
     spark_files_dir = SparkFiles.getRootDirectory()
     config_files = [
