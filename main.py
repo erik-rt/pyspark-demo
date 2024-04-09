@@ -20,13 +20,14 @@ def main(data_source: str, output_uri: str):
     spark, log, _config = start_spark(app_name="pyspark-demo")
 
     # log that main ETL job is starting
-    log.warn("etl_job is up-and-running")
+    log.warn("ETL is up-and-running")
 
     # Extract from S3
     data = extract_data(spark, data_source)
 
     # Transform
     data = transform_data(data)
+    log.warn("Data transformed")
 
     # Load into S3
     load_data(data, output_uri)
@@ -55,6 +56,10 @@ def transform_data(df):
     :return: Transformed DataFrame.
     """
     df = df.groupby("NEIGHBORHOOD").agg(sum("TOTAL UNITS").alias("TOTAL UNITS SUM"))
+
+    print("\n-------------------------")
+    df.show()
+    print("-------------------------\n")
 
     return df
 
