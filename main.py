@@ -5,7 +5,6 @@ etl_job.py
 Example Apache Spark ETL job definition.
 """
 
-import pandas as pd
 import argparse
 from pyspark.sql.functions import sum
 
@@ -49,7 +48,7 @@ def extract_data(spark, data_source: str):
     return df
 
 
-def transform_data(df: pd.DataFrame):
+def transform_data(df):
     """Transform original dataset.
 
     :param df: Input DataFrame.
@@ -60,7 +59,7 @@ def transform_data(df: pd.DataFrame):
     return df
 
 
-def load_data(df: pd.DataFrame, output_uri: str):
+def load_data(df, output_uri: str):
     """Write transformed dataframe to S3 bucket output URI.
 
     :param df: DataFrame to save.
