@@ -57,9 +57,7 @@ def transform_data(df):
     """
     df = df.groupby("NEIGHBORHOOD").agg(sum("TOTAL UNITS").alias("TOTAL UNITS SUM"))
 
-    print("\n-------------------------")
-    df.show()
-    print("-------------------------\n")
+    df.show(n=5)
 
     return df
 
